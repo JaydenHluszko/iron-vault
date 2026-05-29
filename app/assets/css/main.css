@@ -1,0 +1,118 @@
+/* assets/css/main.css */
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+    /* --- 1. Custom Typography Tokens --- */
+    --font-sans: 'Hanken Grotesk', sans-serif;
+
+    --font-size-headline-xl: 48px;
+    --font-size-headline-lg: 32px;
+    --font-size-headline-md: 24px;
+    --font-size-body-lg: 18px;
+    --font-size-body-md: 16px;
+    --font-size-label-sm: 13px;
+
+    /* --- 2. Custom Border Radius System --- */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    /* Large containers */
+
+    /* --- 3. Custom Layout Spacing System --- */
+    --spacing-desktop-padding: 64px;
+    --spacing-mobile-padding: 24px;
+    --spacing-stack-sm: 8px;
+    --spacing-stack-md: 16px;
+    --spacing-stack-lg: 32px;
+    --spacing-section-gap: 80px;
+
+    /* --- 4. Custom Obsidian Color Palette Scale (50 to 950) --- */
+    /* We use custom color names, then map them to semantic components later */
+    --color-obsidian-50: #e5e1e4;
+    /* on-surface / text */
+    --color-obsidian-100: #c9c4d7;
+    /* on-surface-variant */
+    --color-obsidian-200: #928ea0;
+    /* outline */
+    --color-obsidian-300: #474555;
+    /* outline-variant */
+    --color-obsidian-400: #39393b;
+    /* surface-bright */
+    --color-obsidian-500: #353437;
+    /* surface-container-highest */
+    --color-obsidian-600: #2a2a2c;
+    /* surface-container-high */
+    --color-obsidian-700: #201f21;
+    /* surface-container */
+    --color-obsidian-800: #1b1b1d;
+    /* surface-container-low */
+    --color-obsidian-900: #131315;
+    /* surface / background base */
+    --color-obsidian-950: #0e0e10;
+    /* surface-container-lowest */
+
+    /* Custom Purple Primary Action Scale */
+    --color-sanctuary-50: #f5f3ff;
+    --color-sanctuary-100: #e5deff;
+    /* primary-fixed */
+    --color-sanctuary-200: #c8bfff;
+    /* primary-fixed-dim */
+    --color-sanctuary-300: #a899ff;
+    /* secondary accent */
+    --color-sanctuary-400: #8f7fff;
+    /* primary-container */
+    --color-sanctuary-500: #7c67fe;
+    /* Primary core action */
+    --color-sanctuary-600: #5b42db;
+    /* inverse-primary */
+    --color-sanctuary-700: #4222c3;
+    /* on-primary-fixed-variant */
+    --color-sanctuary-800: #2c009e;
+    /* on-primary */
+    --color-sanctuary-900: #1a0063;
+    --color-sanctuary-950: #0a0a0b;
+    /* deepest canvas level */
+}
+
+/* --- 5. Override Nuxt UI Core Semantic Defaults --- */
+:root {
+    /* Forcing our custom color sets into Nuxt UI defaults */
+    --ui-primary: var(--color-sanctuary-500);
+    --ui-radius: var(--radius-md);
+}
+
+/* Native dark-mode-first overrides */
+.dark {
+    /* Map Nuxt UI background and text primitives to your precise tokens */
+    --ui-bg: var(--color-obsidian-900);
+    /* Base canvas surface */
+    --ui-bg-muted: var(--color-obsidian-800);
+    /* Secondary elements */
+    --ui-bg-elevated: var(--color-obsidian-700);
+    /* Cards */
+    --ui-text: var(--color-obsidian-50);
+    /* Body typography */
+    --ui-text-muted: var(--color-obsidian-100);
+    /* Dimmed subtext */
+    --ui-border: var(--color-obsidian-300);
+    /* Base framework lines */
+}
+
+/* Glassmorphism & Active Shadows Utility Classes */
+.bg-sanctuary-glass {
+    background-color: rgba(27, 27, 29, 0.7);
+    backdrop-filter: blur(20px);
+}
+
+.border-sanctuary-glow {
+    border: 1px solid var(--color-obsidian-300);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.border-sanctuary-glow:focus-within,
+.border-sanctuary-glow:hover {
+    border-color: var(--color-sanctuary-500);
+    box-shadow: 0 0 12px rgba(124, 103, 254, 0.15);
+}
