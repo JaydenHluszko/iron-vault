@@ -1,0 +1,34 @@
+services:
+  # The Secure Network Gatekeeper
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: iron-vault-network
+    hostname: iron-vault
+    environment:
+      - TS_AUTHKEY=tskey-auth-ksfLGKj2Pp11CNTRL-nyxDo4JCN2J6izU52ouA3JFc2gqnQi9DX
+      - TS_STATE_DIR=/var/lib/tailscale
+    volumes:
+      # Persists authentication tokens so it doesn't need to re-login on rebuilds
+      - ./data/tailscale:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    restart: unless-stopped
+
+  # Your Private Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: iron-vault-app
+    # CRUCIAL: Forces the app to live inside the tailscale container's network stack
+    network_mode: service:tailscale
+    depends_on:
+      - tailscale
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/iron-vault.db
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
